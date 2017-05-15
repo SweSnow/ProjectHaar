@@ -28,26 +28,33 @@ Vi önskar konstruera W. Första gör vi v endimensionell och sedan konstruerar
 vi en allmän W från denna längd
 """
 
+print(x)
+print(y)
+
 v = v.reshape(1, -1)[0]
 
 def createW(n):
 	W = zeros([n,n])
 	i = 0
 	for j in range(int(n/2)):
-		W[j, i] = 1/2
-		W[j, i+1] = 1/2
+		W[j, i] = 1/sqrt(2)
+		W[j, i+1] = 1/sqrt(2)
 		i += 2
 	i = 0
 	for j in range(int(n/2), n):
-		W[j, i] = -1/2
-		W[j, i+1] = 1/2
+		W[j, i] = -1/sqrt(2)
+		W[j, i+1] = 1/sqrt(2)
 		i += 2
 	return W
 
-
+#override for test
 v = array([100, 200, 44, 50, 20, 20, 4, 2])
 
 W = createW(len(v))
+
+#print(W)
+print(abs(W.T - inv(W)) <  0.0001)
+#print(inv(W))
 
 y = dot(W, v)
 
